@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Belohnungen & Rangliste</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Belohnungen</h1>
+    <nav>
+      <a href="index.html">Zurück zum Kalender</a>
+    </nav>
+  </header>
+
+  <main class="rewards-main">
+    <section class="rewards-list">
+      <h2>Preise (nur zur Motivation)</h2>
+      <ol>
+        <li>480 — Mathe-Meister des Nordpols</li>
+        <li>420 — Goldenes Lineal</li>
+        <li>360 — Plätzchen-Held</li>
+        <li>300 — Weihnachtswaffel-Gutschein (nur symbolisch)</li>
+        <li>240 — Silberner Taschenrechner</li>
+        <li>200 — Pokal der coolen Zahlen</li>
+        <li>160 — Holzlineal mit Stern</li>
+        <li>120 — Mathe-Sticker</li>
+        <li>80  — Erwähnung am Schwarzen Brett</li>
+        <li>40  — Schulterklopfen vom Mathelehrer</li>
+      </ol>
+    </section>
+
+    <section class="leaderboard">
+      <h2>Top 10 (lokal & symbolisch)</h2>
+      <ol id="leaderboardList"></ol>
+    </section>
+  </main>
+
+  <footer>© Schul-Adventskalender</footer>
+  <script>
+    // minimal script to render a fake top10 and insert your local score
+    (function(){
+      const STORAGE_KEY = 'advent_score';
+      const myScore = Number(localStorage.getItem(STORAGE_KEY) || 0);
+      const fakeNames = ['Lena','Noah','Mia','Ben','Emma','Paul','Lea','Jonas','Anna','Luis'];
+      const leader = [];
+
+      // create some fake scores descending
+      for(let i=0;i<10;i++){
+        leader.push({name: fakeNames[i], score: 500 - i*30});
+      }
+      // insert user score randomly into list if >0
+      if(myScore > 0){
+        leader.push({name: 'Du', score: myScore});
+        leader.sort((a,b)=>b.score-a.score);
+      }
+      const top10 = leader.slice(0,10);
+      const ol = document.getElementById('leaderboardList');
+      top10.forEach((p,idx)=>{
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>#${idx+1}</strong> ${p.name} — ${p.score} pts`;
+        ol.appendChild(li);
+      });
+    })();
+  </script>
+</body>
+</html>
