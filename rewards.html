@@ -39,21 +39,8 @@
 
   <footer>© Schul-Adventskalender</footer>
   <script>
-    // minimal script to render a fake top10 and insert your local score
-    (function(){
-      const STORAGE_KEY = 'advent_score';
-      const myScore = Number(localStorage.getItem(STORAGE_KEY) || 0);
-      const fakeNames = ['Lena','Noah','Mia','Ben','Emma','Paul','Lea','Jonas','Anna','Luis'];
-      const leader = [];
-
-      // create some fake scores descending
-      for(let i=0;i<10;i++){
-        leader.push({name: fakeNames[i], score: 500 - i*30});
       }
-      // insert user score randomly into list if >0
-      if(myScore > 0){
-        leader.push({name: 'Du', score: myScore});
-        leader.sort((a,b)=>b.score-a.score);
+
       }
       const top10 = leader.slice(0,10);
       const ol = document.getElementById('leaderboardList');
