@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Schul-Adventskalender 2025</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 id="title">Schul-Adventskalender 2025</h1>
+    <nav>
+      <a href="rewards.html" id="rewardsLink">Belohnungen & Rangliste</a>
+    </nav>
+    <div id="score">Punkte: <span id="scoreVal">0</span></div>
+  </header>
+
+  <main>
+    <section id="calendar" class="grid"></section>
+    <div id="lastFeedback" class="feedback hidden"></div>
+  </main>
+
+  <!-- Invisible / hover-reveal easter eggs -->
+  <img id="egg-rentier" class="egg" src="" alt="rentier">
+  <div id="egg-star" class="egg"></div>
+  <div id="egg-snowflake" class="egg"></div>
+  <div id="egg-wizard" class="egg"></div>
+  <!-- footer: also secret-mode trigger -->
+  <footer id="pageFooter">© Schul-Adventskalender</footer>
+
+  <!-- canvas for snow -->
+  <canvas id="snowCanvas" class="hidden"></canvas>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
