@@ -44,7 +44,7 @@ header{
 
 .gamble-transparent{
   background: transparent;
-  opacity: 0.02;      /* fast unsichtbar */
+  opacity: 0.9;      /* fast unsichtbar */
   transition: opacity .25s, transform .15s;
 }
 .gamble-transparent:hover{
