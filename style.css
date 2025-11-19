@@ -1,193 +1,155 @@
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #eef5ff;
-  color: #222;
+:root{
+  --bg: #eef8ff;
+  --accent: #1e88e5;
+  --card: #ffffff;
+  --muted: #6b879f;
+  --text: #07213a;
 }
 
-header {
-  background: #4b9fea;
-  padding: 10px;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* reset */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: linear-gradient(180deg,var(--bg), #eaf4ff);
+  color:var(--text);
+  min-height:100vh;
 }
 
-nav button {
-  margin-left: 10px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 10px;
-  background: white;
-  cursor: pointer;
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:12px 16px;
+  background:var(--accent);
+  color:white;
+  position:relative;
 }
 
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-  padding: 20px;
-}
+#titleArea{display:flex; align-items:center; gap:12px}
+#siteTitle{margin:0;font-size:1.2rem;cursor:pointer}
 
-.day {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  cursor: pointer;
-  font-size: 20px;
-  border: 2px solid #4b9fea;
-  transition: 0.2s;
-}
-
-.day.locked {
-  background: #bcdcff;
-  border-color: #8abdea;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.day:hover {
-  transform: scale(1.05);
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hidden { display: none; }
-
-.modal-box {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 400px;
-}
-
-/* Score Box */
-#scoreBox {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  background: white;
-  padding: 10px 20px;
-  border-radius: 12px;
-  border: 2px solid #4b9fea;
-  font-size: 20px;
-}
-
-/* Flash */
-.flash {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  border: 2px solid #4b9fea;
-  opacity: 0;
-  transition: 0.5s;
-}
-
-/* Easter Egg 1 */
-.easter-egg {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0);
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  opacity: 0;
-  transition: opacity 1s ease;
-  pointer-events: auto;
-}
-
-.easter-egg:hover {
-  background: #64b5f6;
-  opacity: 0.9;
-}
-
-.easter-egg.active {
-  background: #64b5f6;
-  opacity: 0.4;
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Floating animation */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0px); }
-}
-
-/* Schneemodus */
-.snow-egg {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  font-size: 22px;
-  opacity: 0;
-  cursor: pointer;
-  transition: opacity 0.7s ease;
-}
-
-.snow-egg:hover {
-  opacity: 1;
-}
-
-/* Glücksspiel */
-.wheel-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-.wheel-card {
-  background: white;
-  padding: 20px;
-  border-radius: 20px;
-  width: 350px;
-  text-align: center;
-}
-
-.wheel-container {
-  position: relative;
-  margin: 15px auto;
-  width: 300px;
-  height: 300px;
-}
-
-.wheel-pointer {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 22px;
-}
-
-/* Buttons */
-.spin-btn {
-  background: #2196f3;
-  padding: 10px 20px;
+#mainNav{display:flex; gap:8px}
+.navBtn{
+  background: rgba(255,255,255,0.14);
   color: white;
   border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 10px;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+.navBtn:hover{background: rgba(255,255,255,0.22)}
+
+.gamble-transparent{
+  background: transparent;
+  opacity: 0.02;      /* fast unsichtbar */
+  transition: opacity .25s, transform .15s;
+}
+.gamble-transparent:hover{
+  opacity: 0.95;      /* bei Hover sichtbar */
+  transform: scale(1.03);
 }
 
-.close-btn {
-  margin-top: 10px;
+#scoreBox{
+  position:absolute;
+  right:16px;
+  top:12px;
+  background:var(--card);
+  color:var(--text);
+  padding:6px 10px;
+  border-radius:10px;
+  font-weight:700;
+  box-shadow:0 6px 18px rgba(2,20,40,0.12);
 }
+
+/* main calendar */
+main{padding:18px}
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
+  max-width:980px;
+  margin:0 auto;
+}
+.day{
+  background:var(--card);
+  padding:22px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:800;
+  font-size:1.1rem;
+  color:var(--accent);
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(11,35,64,0.06);
+  transition: transform .18s, background .18s;
+}
+.day:hover{transform:translateY(-6px)}
+.day.locked{opacity:.48; filter:grayscale(.2); cursor:not-allowed}
+
+/* modal */
+.modal{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:60;
+  background: rgba(5,10,20,0.36);
+}
+.modal.hidden{display:none}
+.modalCard{
+  width:min(760px,92%);
+  background:var(--card);
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 18px 40px rgba(11,35,64,0.14);
+  text-align:center;
+}
+.button{
+  background:var(--accent);
+  border:none;
+  color:white;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+.button.alt{background:#d6e8ff;color:var(--accent)}
+
+/* flash */
+.flash{
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:20px;
+  background:var(--card);
+  padding:10px 14px;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(2,20,40,0.14);
+  display:inline-block;
+  z-index:80;
+}
+.hidden{display:none}
+
+/* eggs */
+.easter-egg{
+  position:fixed;
+  width:34px;height:34px;border-radius:50%;
+  right:18px; bottom:18px; background:linear-gradient(180deg,#fff,#f2fbff);
+  opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.easter-egg:hover{opacity:1}
+.easter-egg.active{opacity:.5; animation: float 4s ease-in-out infinite}
+
+@keyframes float {0%{transform:translateY(-6px)}50%{transform:translateY(-2px)}100%{transform:translateY(-6px)}}
+
+/* snow egg */
+.snow-egg{position:fixed; left:12px; top:12px; font-size:18px; opacity:.12; transition:opacity .2s}
+.snow-egg:hover{opacity:1}
+
+/* wheel */
+.wheelWrap{position:relative; width:320px; height:320px; margin:0 auto}
+.pointer{position:absolute; left:50%; top:-8px; transform:translateX(-50%); font-size:22px}
+
+canvas{border-radius:50%; display:block; margin:0 auto; transform-origin:center center}
+
+/* rewards list */
+#rewards{max-width:880px; margin:20px auto; background:var(--card); padding:16px; border-radius:12px; box-shadow:0 12px 30px rgba(11,35,64,0.06)}
+@media (max-width:720px){ .calendar{grid-template-columns:repeat(4,1fr)} }
