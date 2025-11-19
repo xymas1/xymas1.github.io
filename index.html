@@ -1,250 +1,82 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Schul-Adventskalender</title>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f4f4f4;
-        overflow-x: hidden;
-    }
-
-    header {
-        background: #1565c0;
-        color: white;
-        padding: 20px;
-        text-align: center;
-        position: relative;
-    }
-
-    #siteTitle {
-        font-size: 28px;
-        cursor: pointer;
-    }
-
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 10px;
-    }
-    nav button {
-        padding: 10px 20px;
-        border: none;
-        background: #42a5f5;
-        color: white;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    #scoreBox {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: white;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-weight: bold;
-        color: black;
-    }
-
-    /* Kalender */
-    #calendar {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 15px;
-        padding: 30px;
-    }
-
-    .day {
-        background: white;
-        border-radius: 12px;
-        padding: 35px;
-        text-align: center;
-        cursor: pointer;
-        font-size: 24px;
-        transition: 0.3s;
-        user-select: none;
-    }
-
-    .day:hover {
-        background: #bbdefb;
-        transform: scale(1.05);
-    }
-
-    .locked {
-        pointer-events: none;
-        background: #ddd;
-        color: #777;
-    }
-
-    /* Aufgaben-Popup */
-    .modal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.6);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modal.hidden {
-        display: none;
-    }
-
-    .box {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        width: 400px;
-        text-align: center;
-    }
-
-    .box button {
-        margin: 10px 0;
-        padding: 10px;
-        width: 100%;
-        cursor: pointer;
-        border-radius: 8px;
-        border: none;
-        background: #64b5f6;
-        color: white;
-        font-size: 16px;
-    }
-
-    /* Flash Meldungen */
-    #flash {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: black;
-        color: white;
-        padding: 15px 20px;
-        border-radius: 8px;
-        opacity: 0;
-        transition: opacity 0.5s;
-    }
-
-    /* Belohnungsseite */
-    #rewards {
-        padding: 30px;
-        display: none;
-    }
-
-    /* Easter Egg 1 (Unsichtbarer Punkt) */
-    #easter1 {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 40px;
-        height: 40px;
-        opacity: 0;
-        transition: opacity 1s;
-    }
-
-    #easter1.active {
-        opacity: 0.3;
-    }
-
-    /* Easter Egg Schneeflocke */
-    #snowEgg {
-        position: fixed;
-        top: 5px;
-        left: 5px;
-        font-size: 22px;
-        cursor: pointer;
-        opacity: 0.2;
-    }
-
-    /* GLÜCKSRAD */
-    #wheelModal.hidden {
-        display: none;
-    }
-
-    #wheelModal {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.7);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #wheelBox {
-        background: white;
-        padding: 25px;
-        border-radius: 12px;
-        text-align: center;
-    }
-
-    canvas {
-        width: 300px;
-        height: 300px;
-        transition: transform 3s cubic-bezier(.17,.67,.83,.67);
-    }
-
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <div id="siteTitle">🎄 Schul-Adventskalender</div>
-    <div id="scoreBox">Punkte: <span id="score">0</span></div>
+  <div id="titleArea">
+    <h1 id="siteTitle">🎄 Schul-Adventskalender</h1>
+  </div>
 
-    <nav>
-        <button id="homeBtn">Kalender</button>
-        <button id="rewardsBtn">Belohnungen</button>
-        <button id="gambleBtn">Glücksrad</button>
-    </nav>
+  <nav id="mainNav">
+    <button id="homeBtn" class="navBtn">Kalender</button>
+    <button id="rewardsBtn" class="navBtn">Belohnungen</button>
+    <!-- transparent Gamble button (position like before) -->
+    <button id="gambleBtn" class="navBtn gamble-transparent" title="Glücksrad (kosten 20 Punkte)">🎡</button>
+  </nav>
+
+  <div id="scoreBox">Punkte: <span id="score">0</span></div>
 </header>
 
-<div id="calendar"></div>
+<main>
+  <div id="calendar" class="calendar"></div>
 
-<!-- Belohnungen -->
-<div id="rewards">
-    <h2>Belohnungen</h2>
-    <ul>
-        <li>1. Platz – “Riesenpreis”</li>
-        <li>2. Platz – “Großer Preis”</li>
-        <li>3. Platz – “Mittlerer Preis”</li>
-        <li>4–10. Platz – “Kleiner Preis”</li>
-    </ul>
-</div>
+  <section id="rewards" class="hidden">
+    <h2>Belohnungen (nur zur Motivation)</h2>
+    <ol>
+      <li>480 — Mathe-Meister des Nordpols</li>
+      <li>420 — Goldenes Lineal</li>
+      <li>360 — Plätzchen-Held</li>
+      <li>300 — Weihnachtswaffel-Gutschein</li>
+      <li>240 — Silberner Taschenrechner</li>
+      <li>200 — Pokal der Zahlen</li>
+      <li>160 — Holzlineal mit Stern</li>
+      <li>120 — Mathe-Sticker</li>
+      <li>80  — Erwähnung am Schwarzen Brett</li>
+      <li>40  — Schulterklopfen vom Mathelehrer</li>
+    </ol>
+  </section>
+</main>
 
-<!-- Aufgaben-Popup -->
+<!-- Task modal -->
 <div id="taskModal" class="modal hidden">
-    <div class="box">
-        <h2 id="taskTitle"></h2>
-        <p id="taskQuestion"></p>
-        <div id="taskOptions"></div>
-        <button id="closeTask">Schließen</button>
+  <div class="modalCard">
+    <h2 id="taskTitle"></h2>
+    <p id="taskQuestion"></p>
+    <div id="taskOptions"></div>
+    <div style="display:flex; gap:.5rem; margin-top:10px;">
+      <button id="closeTask" class="button">Schließen</button>
     </div>
+  </div>
 </div>
 
 <!-- Flash -->
-<div id="flash"></div>
+<div id="flash" class="flash hidden"></div>
 
-<!-- Easter Egg 1 -->
-<div id="easter1"></div>
+<!-- Easter Eggs -->
+<div id="easter1" class="easter-egg" aria-hidden="true"></div>
+<div id="snowEgg" class="snow-egg" aria-hidden="true">❄</div>
 
-<!-- Easter Egg 2 – Schneeflocke -->
-<div id="snowEgg">❄️</div>
-
-<!-- Glücksrad -->
-<div id="wheelModal" class="hidden">
-    <div id="wheelBox">
-        <h2>🎰 Glücksrad</h2>
-        <canvas id="wheelCanvas" width="300" height="300"></canvas>
-        <br><br>
-        <button id="spinBtn">Drehen</button>
-        <button id="closeWheel">Schließen</button>
+<!-- Glücksrad Modal -->
+<div id="wheelModal" class="modal hidden">
+  <div class="modalCard" id="wheelCard">
+    <h2 id="wheelTitle">🎡 Glücksrad</h2>
+    <div class="wheelWrap">
+      <canvas id="wheelCanvas" width="300" height="300"></canvas>
+      <div class="pointer">▼</div>
     </div>
+    <div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+      <button id="spinBtn" class="button">Drehen</button>
+      <button id="closeWheel" class="button alt">Schließen</button>
+    </div>
+    <p style="font-size:0.9rem; color:#555; margin-top:8px">Drehen kostet 20 Punkte.</p>
+  </div>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 </body>
 </html>
