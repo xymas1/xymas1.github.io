@@ -1,37 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Schul-Adventskalender 2025</title>
+  <meta charset="UTF-8">
+  <title>Schul-Adventskalender</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
+
+<header>
+  <h1 id="siteTitle">🎄 Adventskalender</h1>
+
+  <nav>
+    <button id="homeBtn">Kalender</button>
+    <button id="rewardsBtn">Belohnungen</button>
     <button id="gambleBtn" class="gamble-btn">🎡 Gamble</button>
-    <h1 id="title">Schul-Adventskalender 2025</h1>
-    <nav>
-      <a href="rewards.html" id="rewardsLink">Belohnungen & Rangliste</a>
-    </nav>
-    <div id="score">Punkte: <span id="scoreVal">0</span></div>
-  </header>
+  </nav>
+</header>
 
-  <main>
-    <section id="calendar" class="grid"></section>
-    <div id="lastFeedback" class="feedback hidden"></div>
-  </main>
+<main id="main">
+  <div id="calendar" class="calendar"></div>
+  <div id="taskModal" class="modal hidden">
+    <div class="modal-box">
+      <h2 id="taskTitle"></h2>
+      <p id="taskQuestion"></p>
+      <div id="taskOptions"></div>
+      <button id="closeTask" class="close-btn">Schließen</button>
+    </div>
+  </div>
 
-  <!-- Invisible / hover-reveal easter eggs -->
-  <img id="egg-rentier" class="egg" src="" alt="rentier">
-  <div id="egg-star" class="egg"></div>
-  <div id="egg-snowflake" class="egg"></div>
-  <div id="egg-wizard" class="egg"></div>
-  <!-- footer: also secret-mode trigger -->
-  <footer id="pageFooter">© Schul-Adventskalender</footer>
+  <!-- Belohnungen -->
+  <div id="rewards" class="hidden">
+    <h2>🏆 Rangliste & Belohnungen</h2>
+    <ol>
+      li>Überaschung</li>
+    </ol>
+  </div>
+</main>
 
-  <!-- canvas for snow -->
-  <canvas id="snowCanvas" class="hidden"></canvas>
+<!-- Score Anzeige -->
+<div id="scoreBox">Punkte: <span id="score">0</span></div>
 
-  <script src="script.js" defer></script>
+<!-- Flash Message -->
+<div id="flash" class="flash"></div>
+
+<!-- Easter Egg 1 -->
+<div id="easter1" class="easter-egg"></div>
+
+<!-- Schneemodus -->
+<div id="snowEgg" class="snow-egg">❄</div>
+
+<!-- Glücksspiel Modal -->
+<div id="wheelModal" class="wheel-modal hidden">
+  <div class="wheel-card">
+    <h2>🎡 Glücksrad</h2>
+    <div class="wheel-container">
+      <canvas id="wheelCanvas" width="300" height="300"></canvas>
+      <div class="wheel-pointer">▼</div>
+    </div>
+    <button id="spinBtn" class="spin-btn">Drehen</button>
+    <button id="closeWheel" class="close-btn">Schließen</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
