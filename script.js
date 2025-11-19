@@ -23,7 +23,7 @@ const tasks = [
   {"day":20,"question":"Du hast 3 Schalter, aber nur eine Lampe in einem anderen Raum. Wie findest du mit einem Gang heraus, welcher Schalter dazugehört?","options":["Nur durch Zufall","Einen anschalten, fühlen, prüfen","Alle anschalten","Nacheinander probieren"],"answer":1},
   {"day":21,"question":"Ich habe Tasten, aber keine Schlösser; ich habe Räume, aber keine Türen. Was bin ich?","options":["Ein Computer","Eine Tastatur","Ein Klavier","Ein Telefon"],"answer":2},
   {"day":22,"question":"Was ist die nächste Zahl in der Reihe: 1, 4, 9, 16, ...?","options":["20","24","25","36"],"answer":2},
-  {"day":23,"question":"Ein Springer auf einem 4×4-Schachbrett: Kann er jedes Feld genau einmal besuchen?","options":["Ja","Nein","Nur diagonal","Nur mit Startfeld Mitte"],"answer":1},
+  {"day":23,"question":"Ein pferd auf einem 4×4-Schachbrett: Kann er jedes Feld genau einmal besuchen?","options":["Ja","Nein","Nur diagonal","Nur mit Startfeld Mitte"],"answer":1},
   {"day":24,"question":"Zwei gegenüberliegende Ecken eines 8×8-Bretts sind entfernt. Warum kann man es nicht mit Dominosteinen belegen?","options":["Zu viele Steine","Farbenverteilung stimmt nicht","Ungerade Felderzahl","Dominosteine sind zu groß"],"answer":1}
 ];
 
